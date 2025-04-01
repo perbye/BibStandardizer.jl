@@ -92,11 +92,9 @@ function standardize_bibfile(readpath, savepath, custom_abbreviations = Dict())
     return nothing
 end
 
-
 function standardize_bibstr(str, custom_abbreviations = Dict())
-    bibitems = Bibliography.BibTeX.parse_string(str)
+    bibitems  = Bibliography.BibTeX.parse_string(str)
     std_items = standardize_items(bibitems, custom_abbreviations)
     sort!(std_items)
-    export_bibtex(std_items) |> print
-    return nothing
+    return export_bibtex(std_items)
 end
