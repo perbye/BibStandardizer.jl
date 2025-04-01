@@ -1,6 +1,6 @@
 name = "BibStandardizer"
 uuid = "63038967-68fa-49f0-b6b9-286768fef59e"
-authors = ["perbjarnebye "]
+authors = ["perbye"]
 version = "0.1.0"
 
 [deps]
