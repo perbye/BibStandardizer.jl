@@ -29,14 +29,8 @@ function standardize_item(bibitem_pair, custom_abbreviations = Dict())
     authors_initials = reduce(*, lowercase(author.last[1]) for author in bibitem.authors)
     pub_year         = bibitem.date.year
     pub_year_abb     = pub_year[end-1:end]
-    journal_abb = if isempty(bibitem.in.journal) || occursin("SSRN", bibitem.in.journal) || occursin("working paper", uncapitalize_string(bibitem.in.journal))
-        "wp"
-    elseif !haskey(abb_lookup, uncapitalize_string(bibitem.in.journal))
-        ""
-    else
-        abb_lookup[uncapitalize_string(bibitem.in.journal)]
-    end
-    bibname = isempty(journal_abb) ? authors_initials * "_" * pub_year_abb : authors_initials * "_" * journal_abb * "_" *pub_year_abb
+    journal_abb      = haskey(abb_lookup, uncapitalize_string(bibitem.in.journal)) ? abb_lookup[uncapitalize_string(bibitem.in.journal)] : "wp"
+    bibname          = isempty(journal_abb) ? authors_initials * "_" * pub_year_abb : authors_initials * "_" * journal_abb * "_" *pub_year_abb
 
     # Delete unwanted fields
     for field in ["shorttitle", "abstract", "file", "urldate"]
@@ -49,14 +43,13 @@ function standardize_item(bibitem_pair, custom_abbreviations = Dict())
     # Remove url
     @reset bibitem.access = Bibliography.BibInternal.Access("", "", "")
 
+    # Capitalize title
+    @reset bibitem.title = capitalize_string(replace(bibitem.title, "{" => "", "}" => ""))
+
     # Capitalize journal name
     if !isempty(bibitem.in.journal)
         @reset bibitem.in.journal = capitalize_string(replace(bibitem.in.journal, "{" => "", "}" => ""))
     end
-
-    # Capitalize title
-    @reset bibitem.title = capitalize_string(replace(bibitem.title, "{" => "", "}" => ""))
-
     return bibname, bibitem
 end
 
