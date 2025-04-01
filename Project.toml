@@ -1,0 +1,16 @@
+name = "BibStandardizer"
+uuid = "63038967-68fa-49f0-b6b9-286768fef59e"
+authors = ["perbjarnebye "]
+version = "0.1.0"
+
+[deps]
+Accessors = "7d9f7c33-5ae7-4f3b-8dc6-eff91059b697"
+Bibliography = "f1be7e48-bf82-45af-a471-ae754a193061"
+OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+
+[compat]
+Accessors = "0.1.42"
+Bibliography = "0.3.0"
+OrderedCollections = "1.8.0"
+Revise = "3.7.3"
