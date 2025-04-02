@@ -12,6 +12,8 @@ Given bibitems, standardization will...
 
 ... and output a sorted list of the standardized bibitems.
 
+`BibStandardizer.jl` relies on `Bibliography.jl` for parsing and working with bibitems.
+
 ## Bibitems as a string
 
 BibStandardizer support string parsing via `BibTeX.jl`. Simply pass the string to `standardize_bibstr` which returns a standardized bibitem as a string that can be printed or written to a file.
